@@ -1,0 +1,4 @@
+node_modules/
+.DS_Store
+coinpedia_en.txt
+coinpedia_zh-TW.txt

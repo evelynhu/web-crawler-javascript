@@ -45,8 +45,14 @@ const crawl = (url, locale) => {
     if (symbol) {
       currency = symbol[1].trim().toLowerCase();
     }
-    const introduction = $('div.article__body').find('p').text().trim();
-    fs.appendFileSync(`coinpedia_${locale}.txt`, `${currency}: ${introduction},\n`);
+    let introduction = '';
+    $('div.article__body').find('p').each(function(index) {
+       introduction += $(this).text().replace('\'', '\\\'') + '\\n\\n';
+   });
+
+    if (currency && introduction) {
+      fs.appendFileSync(`coinpedia_${locale}.txt`, `${currency}: '${introduction}',\n`);
+    }
   });
 };
 
